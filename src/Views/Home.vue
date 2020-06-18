@@ -5,7 +5,7 @@
         type="text"
         class="search-bar"
         placeholder="Sök efter en stad.."
-        v-model="query"
+        v-model="cityName"
         @keypress="getWeather"
       />
     </div>
@@ -22,18 +22,21 @@
         </div>
       </div>
     </div>
+    <div class="searched-cities">
+      <h3>Searched Cities: {{this.$store.state.lastSearch}}</h3>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "Home",
-
   data() {
     return {
       api_key: "31f8d73de6e893d2411c1a8b626497f4",
       url_base: "https://api.openweathermap.org/data/2.5/",
-      query: "",
+      cityName: "",
+
       weather: [
         { name: null },
         { country: null },
@@ -51,7 +54,7 @@ export default {
     getWeather(e) {
       if (e.key == "Enter") {
         fetch(
-          `${this.url_base}weather?q=${this.query}&units=metric&APPID=${this.api_key}`
+          `${this.url_base}weather?q=${this.cityName}&units=metric&APPID=${this.api_key}`
         )
           .then(response => response.json())
           .then(result => {
@@ -63,6 +66,8 @@ export default {
             this.weather[0].feels_like = result.main.feels_like;
             this.weather[0].humidity = result.main.humidity;
             this.weather[0].pressure = result.main.pressure;
+
+            this.$store.commit("SET_LAST_SEARCH", this.cityName);
           });
       }
     }

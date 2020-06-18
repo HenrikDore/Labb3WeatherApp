@@ -1,25 +1,16 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
-import Vuex from 'vuex'
-import About from '@/Views/About.vue'
-import Home from '@/Views/Home.vue'
+
+
+import store from './store'
+
+import Home from './Views/Home'
+import About from './Views/About'
 
 Vue.use(VueRouter)
-Vue.use(Vuex)
 
 Vue.config.productionTip = false
-
-
-const store = new Vuex.Store({
-
-  state: {
-    apiInfo: 'weatherAPI used: '
-  }
-
-
-
-})
 
 const router = new VueRouter({
   routes: [{
@@ -36,5 +27,5 @@ const router = new VueRouter({
 new Vue({
   render: h => h(App),
   router,
-  store
+  store // <--
 }).$mount('#app')

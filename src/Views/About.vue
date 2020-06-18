@@ -25,9 +25,5 @@ export default {
   font-size: 30px;
   color: black;
   text-align: center;
-
-  /*
-        <p>API from: <a href="https://openweathermap.org/" target="_blank">Openweather</a></p>
- */
 }
 </style>
